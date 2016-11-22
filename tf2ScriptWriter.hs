@@ -29,15 +29,15 @@ generateFile ws = unlines $ intro ++ aliases
 
 main :: IO ()
 main = do
-  putStr "What file would you like to pull from?"
+  putStrLn "What file would you like to pull from?"
   inFile <- getLine
   exists <- D.doesFileExist inFile
   if exists
      then do
-      putStr "What would you like to name your script?"
+      putStrLn "What would you like to name your script?"
       outFile <- getLine
       let outFile' = if length (S.splitOn "." outFile) == 1 then outFile ++ ".cfg" else outFile
       spamText <- readFile inFile
       writeFile outFile' . generateFile $ lines spamText
      else
-      putStr "Please enter a valid input file."
+      putStrLn "Please enter a valid input file."
