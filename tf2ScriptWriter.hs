@@ -22,22 +22,22 @@ generateFile ws = unlines $ intro ++ aliases
   where
     intro   = ["//HallaSurvivor's Chat Spam Generator"
               ,"bind [key] chatSpam // Your key here!!"
-              ,"alias chatSpam chatSpam1"
+              ,"alias chatSpam chatSpam0"
               ,""
               ]
     aliases = zipWith (makeAlias (length ws)) [1..] ws
 
 main :: IO ()
 main = do
-  print "What file would you like to pull from?"
+  putStr "What file would you like to pull from?"
   inFile <- getLine
   exists <- D.doesFileExist inFile
   if exists
      then do
-      print "What would you like to name your script?"
+      putStr "What would you like to name your script?"
       outFile <- getLine
       let outFile' = if length (S.splitOn "." outFile) == 1 then outFile ++ ".cfg" else outFile
       spamText <- readFile inFile
       writeFile outFile' . generateFile $ lines spamText
      else
-      print "Please enter a valid input file."
+      putStr "Please enter a valid input file."
