@@ -13,9 +13,9 @@ import qualified Data.List.Split  as S
 makeAlias :: Int -> Int -> String -> String
 makeAlias m n s = preface ++ "\"" ++ text ++ nextAlias ++ "\""
   where
-    preface   = "alias chatSpam" ++ show n ++ " "
+    preface   = "alias chatSpam" ++ show (n-1) ++ " "
     text      = "say " ++ s ++ "; "
-    nextAlias = "alias chatSpam chatSpam" ++ if n == m then "1" else show n
+    nextAlias = "alias chatSpam chatSpam" ++ if n == m then "0" else show n
 
 generateFile :: [String] -> String
 generateFile ws = unlines $ intro ++ aliases
